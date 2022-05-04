@@ -29,7 +29,7 @@ require(['gitbook', 'jquery'], function(gitbook, $) {
     // Default font families
     var FAMILIES = [
         {
-            config: 'serif',
+            config: 'serif, 仿宋',
             text: 'Serif',
             id: 0
         },
