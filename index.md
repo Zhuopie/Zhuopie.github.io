@@ -2,4 +2,4 @@
 layout: home
 ---
 
-This is the index page!
+欢迎来到我的博客！这里会记录一些学习心得。
