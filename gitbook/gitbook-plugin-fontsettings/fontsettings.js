@@ -29,8 +29,8 @@ require(['gitbook', 'jquery'], function(gitbook, $) {
     // Default font families
     var FAMILIES = [
         {
-            config: 'times',
-            text: 'Times',
+            config: 'garamond, 楷体',
+            text: 'Garamond',
             id: 0
         },
         {
