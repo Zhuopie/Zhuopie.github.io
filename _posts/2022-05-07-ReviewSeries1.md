@@ -1,11 +1,11 @@
 ---
-title: Review Series 1
+title: Happy Birthday
 author: Zhuopie
-date: 2022-05-07
+date: 2022-05-04
 category: Jekyll
 layout: post
 ---
 
-Why it doesnt work..
+Today is the birthday of my home page! Happy birthday!
 
-试试
+试试中文输入
