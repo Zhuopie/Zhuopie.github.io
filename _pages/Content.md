@@ -10,5 +10,5 @@ layout: post
 
 2022.5.13  Seminar《金融学中的ESG研究》战昕彤
 
-2022.5.14  Paper Reading - **The Best of Both Worlds: Combining RCTs with Structural Modeling** - Presented by 王澍 [[Paper]](http://github.com/Zhuopie/Zhuopie.github.io/blob/main/_pages/thebestofbothworld.pdf)
+2022.5.14  Paper Reading - **The Best of Both Worlds: Combining RCTs with Structural Modeling** - Presented by 王澍 [[Paper]](http://github.com/Zhuopie/Zhuopie.github.io/_pages/thebestofbothworld.pdf)
 
