@@ -1,5 +1,5 @@
 ---
-title: 一篇《财贸经济》的投稿全流程
+title: 审稿样例 -《财贸经济》
 author: Zhuopie
 date: 2022-05-04
 category: Jekyll
