@@ -17,3 +17,5 @@ layout: post
 2022.5.20 Seminar - **A Practical Guide to Counterfactual Estimators for Causal Inference with Time-Series Cross-Sectional Data** 《面板数据因果推断实操指南》- Presented by Yiqing Xu [[Paper]](http://github.com/Zhuopie/Zhuopie.github.io/blob/main/_pages/FEct.pdf) [[推文]](http://mp.weixin.qq.com/s/VmvC53s9iiRVbCp-G3KA6g)
 
 2022.5.21 Seminar 刘潇老师指导 本科生毕业论文展示
+
+2022.5.24 Seminar 《企业迁移的减排效应：兼论“污染天堂假说”与“波特假说”》蔡宏波
