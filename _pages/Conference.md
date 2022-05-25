@@ -19,3 +19,13 @@ layout: post
 2022.5.21 Seminar 刘潇老师指导 本科生毕业论文展示
 
 2022.5.24 Seminar 《企业迁移的减排效应：兼论“污染天堂假说”与“波特假说”》蔡宏波
+
+2022.5.25 Seminar **Topic：Contract Governance in Digital Economics (数字经济的契约治理)**
+
+​	- **Relational Insurance Contracts in the Digital Era** - Presented by Jiajia Cong
+
+​	- **Online Relational Contracts and Offline Investments** - Presented by Zhuoran Lu
+
+​	- **The Complementarity between Network Advantage and Proportional Fees** - Presented by Dingwei Gu
+
+​	- **Competitive Effects of Interconnection Regimes for Asymmetric Platforms** - Presented by Xiao Fu
