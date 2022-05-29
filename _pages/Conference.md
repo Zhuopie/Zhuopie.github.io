@@ -29,3 +29,5 @@ layout: post
 ​	- **The Complementarity between Network Advantage and Proportional Fees** - Presented by Dingwei Gu
 
 ​	- **Competitive Effects of Interconnection Regimes for Asymmetric Platforms** - Presented by Xiao Fu
+
+2022.5.28 Paper Reading  - **The Best of Both Worlds: Combining RCTs with Structural Modeling** - Presented by 王澍
