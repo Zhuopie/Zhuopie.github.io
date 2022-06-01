@@ -1,5 +1,5 @@
 ---
-title: Conference
+title: 记录听过的会议
 author: Zhuopie
 date: 2022-05-04
 category: Jekyll
