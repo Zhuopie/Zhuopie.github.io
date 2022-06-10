@@ -33,6 +33,12 @@ layout: post
 2022.5.28 Paper Reading  - **The Best of Both Worlds: Combining RCTs with Structural Modeling** - Presented by 王澍
 
 2022.6.10 Seminar - **Robot Penetration and Asymmetric Cost Behavior** - Presented by Teng Sun
-	国际工业机器人统计数据来自IFR，这一数据库提供了全球范围内按应用领域、行业分支、机器人类型细分的工业机器人应用的权威数据（http://ifr.org/worldrobotics/）。截止目前，IFR所发布的数据已被广泛应用于机器人相关研究：《机器人与就业——基于行业与地区异质性的探索性分析》孔高文等《中国工业经济》2020年第8期
+	国际工业机器人统计数据来自IFR，这一数据库提供了全球范围内按应用领域、行业分支、机器人类型细分的工业机器人应用的权威[数据](http://ifr.org/worldrobotics/)。截止目前，IFR所发布的数据已被广泛应用于机器人相关研究：《机器人与就业——基于行业与地区异质性的探索性分析》孔高文等《中国工业经济》2020年第8期
 
 2022.6.10 Seminar - **The Effects of AI-Based Detection on Misbehaviors: Empirical Evidence from AIPARK** - Presented by Guangyu Cao
+
+2022.6.10 Seminar - **Search Algorithm, Repetitive Information, and Sales on Online Platforms** - Presented by Sunny Yangguang Huang
+	Related files: [MIT Report: The Future of Platforms](http://github.com/Zhuopie/Zhuopie.github.io/blob/main/_pages/TheFutureofPlatforms.pdf); 
+	[European Comission Report: Competition Policy for the Digital Era](http://github.com/Zhuopie/Zhuopie.github.io/blob/main/_pages/CompetitionPolicyfortheDigitalEra.pdf);
+	[OECD Digital Economy Outlook 2020](http://github.com/Zhuopie/Zhuopie.github.io/blob/main/_pages/OECDDigitalEconomyOutlook2020);
+	[[Paper]](http://github.com/Zhuopie/Zhuopie.github.io/blob/main/_pages/search_algorithm)
