@@ -40,5 +40,5 @@ layout: post
 2022.6.10 Seminar - **Search Algorithm, Repetitive Information, and Sales on Online Platforms** - Presented by Sunny Yangguang Huang
 	Related files: [MIT Report: The Future of Platforms](http://github.com/Zhuopie/Zhuopie.github.io/blob/main/_pages/TheFutureofPlatforms.pdf); 
 	[European Comission Report: Competition Policy for the Digital Era](http://github.com/Zhuopie/Zhuopie.github.io/blob/main/_pages/CompetitionPolicyfortheDigitalEra.pdf);
-	[OECD Digital Economy Outlook 2020](http://github.com/Zhuopie/Zhuopie.github.io/blob/main/_pages/OECDDigitalEconomyOutlook2020);
-	[[Paper]](http://github.com/Zhuopie/Zhuopie.github.io/blob/main/_pages/search_algorithm)
+	[OECD Digital Economy Outlook 2020](http://github.com/Zhuopie/Zhuopie.github.io/blob/main/_pages/OECDDigitalEconomyOutlook2020.pdf);
+	[[Paper]](http://github.com/Zhuopie/Zhuopie.github.io/blob/main/_pages/search_algorithm.pdf)
