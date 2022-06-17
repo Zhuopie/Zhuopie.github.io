@@ -46,3 +46,5 @@ layout: post
 ​	[OECD Digital Economy Outlook 2020](http://github.com/Zhuopie/Zhuopie.github.io/blob/main/_pages/OECDDigitalEconomyOutlook2020.pdf)
 
 2022.6.10  第十二届产业组织前沿问题研讨会
+
+2022.6.17 Seminar 《纵向合约的市场竞争效果分析》居恒
