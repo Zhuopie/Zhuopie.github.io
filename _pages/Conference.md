@@ -48,3 +48,5 @@ layout: post
 2022.6.10  第十二届产业组织前沿问题研讨会
 
 2022.6.17 Seminar 《纵向合约的市场竞争效果分析》居恒
+
+2022.6.18 Seminar -  **Thinking Hierarchy** - Presented by 孔雨晴
