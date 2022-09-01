@@ -16,14 +16,14 @@ layout: post
 
 数据框是最常见的数据形式，也是stata的数据展示形式，可以通过以下方式创建
 
-```yaml
+```
 mydata <- data.frame(col1,col2,col3,...)
 ```
 
 
 实例标识符（case identifier）看通过row.names指定
 
-```yaml
+```
 mydata <- data.frame(col1,col2,col3,.... row.names=XX)
 ```
 
