@@ -65,7 +65,7 @@ save.image("C:/Users/lzp57/Desktop/EmpiricalIO/kuaikan_test.RData")
 #保存一个workspace 默认的文件格式为.RData
 ```
 
-**1.4 查看数据格式**
+**1.4 清理数据Example**
 
 ```
 str(kuaikan)
@@ -84,8 +84,17 @@ kuaikan$createtime <- as.numeric(kuaikan$createtime)
 #先把十三位时间从字符型转为数字型
 kuaikan$createtime=as.POSIXct((kuaikan$createtime/1000), origin="1970-01-01",tz="Asia/Shanghai")
 #再转为时间，格式类似于2022-08-04 11:41:28
+
+kuaikan$date <- format(kuaikan$createtime, "%Y/%m/%d")
+#生成新变量，只提取年月日
+
+install.packages("readr")
+#提取数字的包
+kuaikan$readmsg <- parse_number(kuaikan$readmsg)
+
+kuaikan$createtimestr <- NULL
+#删除多余的变量
 ```
 
-```
-time=format(dat, "%H:%M")
-```
+
+
