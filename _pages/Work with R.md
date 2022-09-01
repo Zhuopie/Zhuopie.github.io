@@ -67,7 +67,7 @@ save.image("C:/Users/lzp57/Desktop/EmpiricalIO/kuaikan_test.RData")
 
 **1.4 查看数据格式**
 
-```
+```markdown
 str(kuaikan)
 summary(kuaikan)
 
@@ -75,7 +75,7 @@ kuaikan$score <- as.numeric(kuaikan$score)
 #“打分”转为数值型
 kuaikan$sexstr <- as.factor(kuaikan$sexstr)
 #“性别”转为因子型
-> kuaikan$itemname <- as.factor(kuaikan$itemname)
+kuaikan$itemname <- as.factor(kuaikan$itemname)
 #“漫画名称”转为因子型，表示有N本不同的漫画
 kuaikan$name <- as.factor(kuaikan$name)
 #“用户ID”转为因子型，表示有N个不同的打分人
