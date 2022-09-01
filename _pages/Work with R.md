@@ -67,7 +67,7 @@ save.image("C:/Users/lzp57/Desktop/EmpiricalIO/kuaikan_test.RData")
 
 **1.4 查看数据格式**
 
-```tex
+```R
 str(kuaikan)
 summary(kuaikan)
 
@@ -86,3 +86,6 @@ kuaikan$createtime=as.POSIXct((kuaikan$createtime/1000), origin="1970-01-01",tz=
 #再转为时间，格式类似于2022-08-04 11:41:28
 ```
 
+```
+time=format(dat, "%H:%M")
+```
