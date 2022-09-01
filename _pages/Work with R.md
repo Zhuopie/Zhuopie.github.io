@@ -67,7 +67,7 @@ save.image("C:/Users/lzp57/Desktop/EmpiricalIO/kuaikan_test.RData")
 
 **1.4 查看数据格式**
 
-```R
+```
 str(kuaikan)
 summary(kuaikan)
 
