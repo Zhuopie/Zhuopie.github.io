@@ -143,6 +143,13 @@ i <- rep(1:1000,each=2)
 k <- rep(1:2,times=1000)
 x <- rep(0:1,times=1000)
 HW1data <- data.frame(i,k,x)
+
+#用tibble的方法为
+tibbledata <- tibble(
+    i = rep(1:1000,each=2),
+    k = rep(1:2,times=1000),
+    x = rep(0:1,times=1000)
+)
 ```
 
 Step 2：使用`evd`包随机生成第一类极值分布的数据，随机种子为1，完成以下的数据构造
@@ -232,6 +239,8 @@ HW1data <- HW1data %>% group_by(i) %>%
   mutate(y=case_when(latent==max(latent) ~ 1,TRUE ~ 0)) %>%
   ungroup
 HW1data
+
+#tibble是data.frame的子类型
 ```
 
 由于设定了随机扰动项服从第一类极值分布，且为独立同分布，可以得到，在给定参数$\beta$的值后，$y_{ik}=1$的概率为
@@ -246,9 +255,39 @@ $$
 $$
 l(\beta)=\sum_{i=1}^{1000}\left\{y_{i 1} \log p_{i 1}(\beta)+\left(1-y_{i 1}\right) \log \left[1-p_{i 1}(\beta)\right\}\right.
 $$
-Step 4：写一个函数，用来计算给定$\beta$后的似然值，将该函数命名为`loglikelihood_A1`
+Step 4：写一个函数，用来计算给定$\beta$后的似然值，将该函数命名为`
+
+**答案**
+
+```
+#对于构造增量不为1的数列，可以使用seq函数
+betalist <- seq(from=0, to=1, by=0.1)
+
+#R中的向量默认为列向量
+
+p <- function(beta){
+  exp(beta*0)/(exp(beta*0)+exp(beta*1))
+}
+
+loglikelihood_A1 <- function(y,beta) {
+  loglikelihood <- colSums(y %*% log(p(beta))+(1-y) %*% log(1-p(beta)))
+}
+
+ymatrix <- HW1data$y[HW1data$k==1]
+betamatrix <- t(betalist)
+
+loglikelihoodlist <- loglikelihood_A1(ymatrix,betamatrix)
+```
 
 Step 5： 计算当$\beta=0, 0.1, 0.2, ... , 1$的时候的似然值，使用包`ggplot2`绘图，横轴为$\beta$，纵轴为似然值
+
+**答案**
+
+```
+qplot(betalist, loglikelihoodlist)
+
+ggplot(data=plot,aes(x=betalist,y=loglikelihoodlist))+geom_point()+theme(plot.title = element_text(hjust=0.5))+labs(title="Estimate for Base Model",x=expression(beta),y="loglokelihood")
+```
 
 Step 6：找到并报告使得似然函数值最大的$\beta$值，使用`optim`函数来得到这一结果，可以使用`Brent`方法在-1到1区间来寻找（最优的）参数
 
@@ -270,5 +309,21 @@ Step 6：找到并报告使得似然函数值最大的$\beta$值，使用`optim`
 ## NULL
 ```
 
- 
+ **答案**
+
+```
+#上面为了计算的方便，使用了矩阵语言同时计算所有beta下的loglikelihood值，但是为了寻找最优的参数，我们将函数调整为一维输入
+
+loglikelihood_A1_one <- function(beta) {
+  loglikelihood <- sum(HW1data$y[HW1data$k==1] * log(p(beta))+(1-HW1data$y[HW1data$k==1]) * log(1-p(beta)))
+}
+
+#这样设定的函数，输入的变量就只有beta一个，如下面的例子所示
+loglikelihood <- loglikelihood_A1_one(0)
+
+#使用optim函数进行优化，有几种不同的算法，我们使用的是Brent
+optim(1, loglikelihood_A1_one, NULL, method = "Brent",lower = -1, upper = 1,control = list(fnscale = -1))
+
+#control = list(fnscale = -1)这句话用来控制我们的最优化是最大化（默认为最小化）
+```
 
