@@ -138,7 +138,7 @@ Step 1：首先完成以下的数据构造
 
 ```
 # 构造三个向量
-使用rep函数创建重复序列的向量
+#使用rep函数创建重复序列的向量
 i <- rep(1:1000,each=2)
 k <- rep(1:2,times=1000)
 x <- rep(0:1,times=1000)
@@ -224,6 +224,14 @@ Step 4：得到$y$的值，形成以下的数据构造
 **答案**
 
 ```
+install.packages("dplyr")
+library("dplyr")
+# %>%是传递符号
+
+HW1data <- HW1data %>% group_by(i) %>% 
+  mutate(y=case_when(latent==max(latent) ~ 1,TRUE ~ 0)) %>%
+  ungroup
+HW1data
 ```
 
 由于设定了随机扰动项服从第一类极值分布，且为独立同分布，可以得到，在给定参数$\beta$的值后，$y_{ik}=1$的概率为
