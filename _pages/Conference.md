@@ -50,3 +50,5 @@ layout: post
 2022.6.17 Seminar 《纵向合约的市场竞争效果分析》居恒
 
 2022.6.18 Seminar -  **Thinking Hierarchy** - Presented by 孔雨晴
+
+2022.9.20 Seminar - **A Macro Model with Bond Market Liquidity** - Presented by Huifeng Chang
