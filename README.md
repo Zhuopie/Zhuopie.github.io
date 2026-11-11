@@ -6,10 +6,10 @@ A small, accessible, English-language academic website with original Chinese pub
 
 ## Pages
 
-- `index.html`: Home, affiliation, research interests, education, advisors, and contact.
+- `index.html`: A concise introduction, portrait, contact links, education, and advisors.
 - `research/index.html`: Published research with original Chinese titles and links to publication records, plus a separate case-study section.
 - `projects/index.html`: Research-project participation and academic honors.
-- `interests/index.html`: A reserved page for personal interests. It is deliberately marked `noindex` until substantive content is provided.
+- `interests/index.html`: Badminton as a personal interest, with an owner-supplied photograph.
 - `404.html`: Missing and removed pages return an explanatory error page, not an automatic redirect.
 
 ## Editing and checking
@@ -22,11 +22,11 @@ python3 tests/check_site.py
 
 For a local preview, use a static HTTP server from the repository root. No build step is required. Publishing the default branch uses the repository's existing GitHub Pages deployment.
 
-Keep page titles, descriptions, canonical URLs, and `sitemap.xml` in sync. Only add an Interests sitemap entry after replacing its placeholder with confirmed content and removing its `noindex` directive.
+Keep page titles, descriptions, canonical URLs, and `sitemap.xml` in sync. The Interests page is indexed and included in the sitemap.
 
 ## Content sources
 
-Biographical details and published work were verified against the [Shenzhen University faculty profile](https://eco.szu.edu.cn/info/1033/5949.htm), linked journal records, and publisher DOI records. Chinese-language publications use their original titles. Advisor relationships, the case-study citation, and honors were supplied by the site owner. Faculty names and links were checked against their university or personal profiles. The NSFC entry is a Major Project subproject with Lingfang (Ivy) Li as subproject PI; the site owner is listed as a research participant, not PI. The Shanghai government project and completed/participant status are recorded on the Shenzhen University profile. Award years, a government-project year, and case-publication details are not inferred.
+Biographical details and published work were verified against the [Shenzhen University faculty profile](https://eco.szu.edu.cn/info/1033/5949.htm), linked journal records, and publisher DOI records. Chinese-language publications use their original titles. Advisor relationships, the case-study citation, and honors were supplied by the site owner. Faculty names and links were checked against their university or personal profiles. The NSFC entry is a Major Project subproject with Lingfang (Ivy) Li as subproject PI; the site owner is listed as a research participant, not PI. The Shanghai government project and completed/participant status are recorded on the Shenzhen University profile. The 2026 conference Outstanding Paper Award, its conference name, and the three photographs were supplied by the site owner. The award entry does not infer a paper title. Other award years and a government-project year are not inferred. The portrait uses a reversible CSS crop; all three image files retain their original pixels and contain no EXIF metadata.
 
 The former notes, reading attachments, search index, and GitBook interface have been removed from the current website. There is no notes archive on the current website. This content update does not rewrite Git history.
 

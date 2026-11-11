@@ -37,7 +37,7 @@ for file, path in pages.items():
     assert all(a.get('type')=='application/ld+json' for a in doc.attrs('script')),'Unexpected JavaScript'
     person=json.loads(''.join(doc.jsonld)); assert person['name']=='Zhuopai Li' and person['jobTitle']=='Assistant Professor'
     robots=next(a['content'] for a in doc.attrs('meta') if a.get('name')=='robots')
-    assert ('noindex' in robots)==(file in ['404.html','interests/index.html']),file
+    assert ('noindex' in robots)==(file=='404.html'),file
     if file!='404.html': assert len([a for a in doc.attrs('a') if a.get('aria-current')=='page'])==1,file
     print('PASS',file)
 for path in ['_pages','_posts','gitbook','search.html','search_plus_index.json','index.md']:
@@ -45,7 +45,7 @@ for path in ['_pages','_posts','gitbook','search.html','search_plus_index.json',
 assert (ROOT/'.nojekyll').is_file()
 sitemap=ET.parse(ROOT/'sitemap.xml')
 urls={x.text for x in sitemap.findall('.//{http://www.sitemaps.org/schemas/sitemap/0.9}loc')}
-assert urls=={'https://zhuopie.github.io/','https://zhuopie.github.io/research/','https://zhuopie.github.io/projects/'}
+assert urls=={'https://zhuopie.github.io/','https://zhuopie.github.io/research/','https://zhuopie.github.io/projects/','https://zhuopie.github.io/interests/'}
 assert 'Sitemap: https://zhuopie.github.io/sitemap.xml' in (ROOT/'robots.txt').read_text()
 research=Document((ROOT/'research/index.html').read_text()); assert len(research.attrs('article'))==7
 home=(ROOT/'index.html').read_text()
@@ -62,3 +62,22 @@ assert '2022.01–2026.12' in projects
 for term in ['数字经济反垄断科学监管创新研究','市场监管服务和融入全国统一大市场建设的政策研究','博士生国家奖学金','上海市优秀博士毕业生']:
     assert term in projects,term
 print('PASS note removal, static deployment, sitemap, robots, six publications, separate case study, advisors, project roles, and honors')
+
+# Owner-supplied photos and the simpler home page must remain accessible.
+assert home.count('Assistant Professor') == 4  # description, OG description, JSON-LD and biography
+assert 'profile-details' not in home and 'class="position"' not in home
+assert 'class="eyebrow"' not in home
+assert 'Outstanding Paper Award, 2026' in projects
+assert '中国数字经济与管理学术会议暨中国信息学会第38届年会（2026）会议优秀论文' in projects
+interests=(ROOT/'interests/index.html').read_text()
+assert 'I enjoy playing badminton.' in interests and 'More to come.' not in interests
+assert 'Traffic Supply' not in projects  # Do not infer or add a paper title.
+image_count=0
+for file in pages:
+    for a in Document((ROOT/file).read_text()).attrs('img'):
+        assert a.get('alt') and a.get('width') and a.get('height'), (file,a)
+        assert a['src'].startswith('/assets/images/'), (file,a)
+        assert (ROOT/a['src'].lstrip('/')).is_file(), (file,a)
+        image_count+=1
+assert image_count==3
+print('PASS concise homepage, confirmed badminton interest, 2026 award, and three local accessible photos')
