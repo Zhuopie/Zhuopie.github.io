@@ -17,14 +17,13 @@ class Document(HTMLParser):
     def handle_data(self, data):
         (self.jsonld if self.in_script else self.data).append(data)
     def attrs(self, tag): return [a for t,a in self.tags if t==tag]
-pages={'index.html':'/', 'research/index.html':'/research/', 'interests/index.html':'/interests/', '404.html':'/404.html'}
+pages={'index.html':'/', 'research/index.html':'/research/', 'interests/index.html':'/interests/', 'projects/index.html':'/projects/', '404.html':'/404.html'}
 for file, path in pages.items():
     doc=Document((ROOT/file).read_text())
     assert doc.attrs('html')[0].get('lang')=='en',file
     assert len(doc.attrs('h1'))==1,file
     assert len(doc.attrs('main'))==1,file
     assert len(doc.attrs('title'))==1,file
-    assert not re.search(r'[\u3400-\u9fff]', ''.join(doc.data)),f'Non-English visible content: {file}'
     assert any(a.get('name')=='description' and a.get('content') for a in doc.attrs('meta')),file
     assert any(a.get('rel')=='canonical' and a['href']=='https://zhuopie.github.io'+path for a in doc.attrs('link')),file
     ids=[a['id'] for _,a in doc.tags if 'id' in a]; assert len(ids)==len(set(ids)),file
@@ -46,7 +45,20 @@ for path in ['_pages','_posts','gitbook','search.html','search_plus_index.json',
 assert (ROOT/'.nojekyll').is_file()
 sitemap=ET.parse(ROOT/'sitemap.xml')
 urls={x.text for x in sitemap.findall('.//{http://www.sitemaps.org/schemas/sitemap/0.9}loc')}
-assert urls=={'https://zhuopie.github.io/','https://zhuopie.github.io/research/'}
+assert urls=={'https://zhuopie.github.io/','https://zhuopie.github.io/research/','https://zhuopie.github.io/projects/'}
 assert 'Sitemap: https://zhuopie.github.io/sitemap.xml' in (ROOT/'robots.txt').read_text()
-research=Document((ROOT/'research/index.html').read_text()); assert len(research.attrs('article'))==6
-print('PASS note removal, static deployment, sitemap, robots, and six publication records')
+research=Document((ROOT/'research/index.html').read_text()); assert len(research.attrs('article'))==7
+home=(ROOT/'index.html').read_text()
+for name in ['Lingfang (Ivy) Li', 'Chiu Yu Ko', 'Xinfei Huang']:
+    assert name in home,name
+text=(ROOT/'research/index.html').read_text()
+for title in ['平台经济反垄断监管：立法动向、实践难题与典型案例','方言壁垒与城市间贸易：证据、机制和对策','贸易数字化政策与企业对外直接投资：来自跨境电商综合试验区的证据','出口经验与企业对外直接投资','信邦：信息化引导的管理变革']:
+    assert title in text,title
+assert 'Case study, 2023.' in text
+projects=(ROOT/'projects/index.html').read_text()
+assert projects.count('<dd>Research participant</dd>')==2
+assert '<dt>Subproject PI</dt><dd><a ' in projects
+assert '2022.01–2026.12' in projects
+for term in ['数字经济反垄断科学监管创新研究','市场监管服务和融入全国统一大市场建设的政策研究','博士生国家奖学金','上海市优秀博士毕业生']:
+    assert term in projects,term
+print('PASS note removal, static deployment, sitemap, robots, six publications, separate case study, advisors, project roles, and honors')
