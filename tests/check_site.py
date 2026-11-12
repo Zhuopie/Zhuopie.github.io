@@ -81,3 +81,25 @@ for file in pages:
         image_count+=1
 assert image_count==3
 print('PASS concise homepage, confirmed badminton interest, 2026 award, and three local accessible photos')
+
+# Chinese journal titles retain their originals and have a separate English line.
+translations = {
+    "平台经济反垄断监管：立法动向、实践难题与典型案例": "Antitrust Regulation of the Platform Economy: Legislative Developments, Practical Challenges, and Illustrative Cases",
+    "方言壁垒与城市间贸易：证据、机制和对策": "Dialect Barriers and Intercity Trade: Evidence, Mechanisms, and Policy Responses",
+    "贸易数字化政策与企业对外直接投资：来自跨境电商综合试验区的证据": "Trade Digitalization Policy and Firms’ Outward Foreign Direct Investment: Evidence from Cross-Border E-Commerce Comprehensive Pilot Zones",
+    "出口经验与企业对外直接投资": "Export Experience and Firms’ Outward Foreign Direct Investment"
+}
+for original, translation in translations.items():
+    expected = f'<h3 lang="zh-Hans">{original}</h3>\\s*<p class="publication-translation" lang="en"><span class="translation-label">English translation:</span> {re.escape(translation)}</p>'
+    assert re.search(expected, text), original
+assert text.count('class="publication-translation"') == 4
+publication_links = [a['href'] for a in research.attrs('a') if a.get('class') == 'publication-link']
+assert publication_links == [
+    'https://jmsc.tju.edu.cn/jmsc/article/issue/2026_5',
+    'https://jrpl.ajcass.com/Magazine/GetIssueContentList?issue=4&year=2026',
+    'https://doi.org/10.1080/00036846.2026.2665336',
+    'https://doi.org/10.1080/13504851.2024.2449541',
+]
+assert 'University record' not in text
+assert 'The linked records provide publication details.' not in text
+print('PASS four bilingual Chinese journal titles, no personal-profile publication links, and preserved journal/DOI links')
