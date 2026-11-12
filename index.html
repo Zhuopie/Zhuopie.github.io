@@ -19,6 +19,8 @@
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/assets/style.css?v=fde1318645f8">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","@id":"https://zhuopie.github.io/#person","name":"Zhuopai Li","alternateName":"李卓派","url":"https://zhuopie.github.io/","jobTitle":"Assistant Professor","email":"mailto:zpli@szu.edu.cn","affiliation":{"@type":"CollegeOrUniversity","name":"Shenzhen University","department":{"@type":"Organization","name":"College of Economics"}},"sameAs":["https://eco.szu.edu.cn/info/1033/5949.htm"],"knowsAbout":["Applied Microeconomic Theory","Digital Economy","Platform Economics"]}</script>
+  <link rel="stylesheet" href="/assets/guestbook.css?v=1">
+  <script src="/assets/guestbook.js?v=1" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -50,6 +52,30 @@
           <div><dt>The Chinese University of Hong Kong</dt><dd>Visiting Ph.D. student <span>2024–2025</span></dd><dd class="advisor">Visiting advisor: <a href="https://kochiuyu.github.io/">Chiu Yu Ko</a></dd></div>
           <div><dt>Sun Yat-sen University</dt><dd>Bachelor of Management <span>2016–2020</span></dd><dd class="advisor">Undergraduate advisor: <a href="https://isbf.sysu.edu.cn/zh-hans/node/249">Xinfei Huang</a></dd></div>
         </dl>
+      </section>
+      <section class="guestbook-section" id="guestbook" aria-labelledby="guestbook-title">
+        <div><h2 id="guestbook-title">Guestbook</h2><p class="guestbook-subtitle" lang="zh-CN">欢迎留下你的足迹。</p></div>
+        <div class="guestbook-content">
+          <div class="guestbook-reactions" aria-label="Leave a reaction">
+            <button type="button" data-reaction="visit" aria-pressed="false"><span aria-hidden="true">👋</span> <span lang="zh-CN">我来了</span><span class="guestbook-count" data-count="visit">—</span></button>
+            <button type="button" data-reaction="like" aria-pressed="false"><span aria-hidden="true">♡</span> <span lang="zh-CN">点赞</span><span class="guestbook-count" data-count="like">—</span></button>
+          </div>
+          <p class="guestbook-note">No account needed. Reactions are remembered per browser.</p>
+          <form id="guestbook-form">
+            <label for="guestbook-name">Name / 昵称 <span>(optional)</span></label>
+            <input id="guestbook-name" name="name" maxlength="40" autocomplete="nickname" placeholder="Guest / 访客">
+            <label for="guestbook-message">Message / 留言</label>
+            <textarea id="guestbook-message" name="message" maxlength="1000" rows="4" required placeholder="Say hello… / 留句话吧"></textarea>
+            <div class="guestbook-trap" aria-hidden="true"><label for="guestbook-website">Leave this blank</label><input id="guestbook-website" name="website" tabindex="-1" autocomplete="off"></div>
+            <p class="guestbook-note" id="guestbook-privacy">Your name and message will be public immediately. Please do not share private information.<br><span lang="zh-CN">昵称与留言提交后直接公开，无需邮箱或账号。请勿填写私人资料。</span></p>
+            <button type="submit" aria-describedby="guestbook-privacy">Post message / 发表留言</button>
+          </form>
+          <p id="guestbook-status" role="status" aria-live="polite"></p>
+          <div id="guestbook-comments" aria-label="Public messages"></div>
+          <button type="button" id="guestbook-more" hidden>More messages / 更多留言</button>
+          <details class="guestbook-details"><summary>Privacy &amp; moderation / 隐私与管理</summary><p>Messages and nickname are stored in the guestbook service and can be removed by the site owner. A random browser identifier is used to remember reactions and reduce duplicate posts. Temporary abuse-prevention records expire and are cleared on subsequent interactions; the application does not store your original IP address. The hosting provider also processes connection data. No advertising or analytics cookies are used.</p><p lang="zh-CN">匿名留言不代表经过身份核验。站主可移除不适当内容。互动计数按浏览器记录，并非独立访客统计；清除浏览器数据或更换设备后可能重复计数。</p><a href="https://zhuopie-guestbook.frolickingpancake3.chatgpt.site/admin">Owner dashboard / 站主管理</a></details>
+          <noscript><p>Please enable JavaScript to use the guestbook. / 请开启 JavaScript 使用留言板。</p></noscript>
+        </div>
       </section>
     </main>
     <footer class="site-footer">

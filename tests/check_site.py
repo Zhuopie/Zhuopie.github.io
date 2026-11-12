@@ -34,7 +34,7 @@ for file, path in pages.items():
         target=ROOT/unquote(u.path.lstrip('/')) if u.path.startswith('/') else (ROOT/file).parent/unquote(u.path)
         if target.is_dir(): target=target/'index.html'
         assert target.is_file(),(file,href)
-    assert all(a.get('type')=='application/ld+json' for a in doc.attrs('script')),'Unexpected JavaScript'
+    assert all(a.get('type')=='application/ld+json' or (file=='index.html' and a.get('src')=='/assets/guestbook.js?v=1') for a in doc.attrs('script')),'Unexpected JavaScript'
     person=json.loads(''.join(doc.jsonld)); assert person['name']=='Zhuopai Li' and person['jobTitle']=='Assistant Professor'
     robots=next(a['content'] for a in doc.attrs('meta') if a.get('name')=='robots')
     assert ('noindex' in robots)==(file=='404.html'),file
@@ -103,3 +103,9 @@ assert publication_links == [
 assert 'University record' not in text
 assert 'The linked records provide publication details.' not in text
 print('PASS four bilingual Chinese journal titles, no personal-profile publication links, and preserved journal/DOI links')
+
+assert (ROOT/"assets/guestbook.js").is_file()
+assert (ROOT/"assets/guestbook.css").is_file()
+assert "textContent=c.body" in (ROOT/"assets/guestbook.js").read_text()
+assert "innerHTML" not in (ROOT/"assets/guestbook.js").read_text()
+print("PASS guestbook asset allowlist and text-only rendering")
