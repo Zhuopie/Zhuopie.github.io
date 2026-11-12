@@ -34,7 +34,7 @@ for file, path in pages.items():
         target=ROOT/unquote(u.path.lstrip('/')) if u.path.startswith('/') else (ROOT/file).parent/unquote(u.path)
         if target.is_dir(): target=target/'index.html'
         assert target.is_file(),(file,href)
-    assert all(a.get('type')=='application/ld+json' or (file=='index.html' and a.get('src')=='/assets/guestbook.js?v=1') for a in doc.attrs('script')),'Unexpected JavaScript'
+    assert all(a.get('type')=='application/ld+json' or (file=='index.html' and a.get('src')=='/assets/guestbook.js?v=2-bilingual') for a in doc.attrs('script')),'Unexpected JavaScript'
     person=json.loads(''.join(doc.jsonld)); assert person['name']=='Zhuopai Li' and person['jobTitle']=='Assistant Professor'
     robots=next(a['content'] for a in doc.attrs('meta') if a.get('name')=='robots')
     assert ('noindex' in robots)==(file=='404.html'),file
@@ -109,3 +109,28 @@ assert (ROOT/"assets/guestbook.css").is_file()
 assert "textContent=c.body" in (ROOT/"assets/guestbook.js").read_text()
 assert "innerHTML" not in (ROOT/"assets/guestbook.js").read_text()
 print("PASS guestbook asset allowlist and text-only rendering")
+
+# All owner-written guestbook copy is presented in both English and Chinese.
+guestbook = home.split('<section class="guestbook-section"', 1)[1].split('</section>', 1)[0]
+for english, chinese in [
+    ('Guestbook', '留言板'),
+    ('Leave a note to say hello.', '欢迎留下你的足迹。'),
+    ('I was here /', '我来了'),
+    ('Like /', '点赞'),
+    ('No account needed. Reactions are remembered per browser.', '无需账号。互动状态按浏览器记录。'),
+    ('optional /', '选填'),
+    ('No email or account is needed.', '无需邮箱或账号'),
+    ('Messages and nicknames are stored in the guestbook service', '留言与昵称存储在留言板服务中'),
+    ('Reaction counts are recorded per browser, not per unique visitor', '互动计数按浏览器记录，并非独立访客统计'),
+    ('the application does not store your original IP address', '本应用不存储你的原始 IP 地址'),
+    ('Anonymous messages and nicknames are not verified identities.', '匿名留言与昵称不代表经过身份核验。'),
+]:
+    assert english in guestbook and chinese in guestbook, (english, chinese)
+guestbook_js = (ROOT/'assets/guestbook.js').read_text()
+for phrase in ['This message has already been submitted. / 这条留言已经提交过了。',
+               'Please refresh to see your message. / 请刷新查看留言。',
+               'Please refresh the page and try again. / 请刷新页面后重试。']:
+    assert phrase in guestbook_js, phrase
+assert '/assets/guestbook.css?v=2-bilingual' in home
+assert '/assets/guestbook.js?v=2-bilingual' in home
+print('PASS bilingual guestbook labels, privacy disclosures, errors, and refresh feedback')
