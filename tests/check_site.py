@@ -90,7 +90,7 @@ translations = {
     "出口经验与企业对外直接投资": "Export Experience and Firms’ Outward Foreign Direct Investment"
 }
 for original, translation in translations.items():
-    expected = f'<h3 lang="zh-Hans">{original}</h3>\\s*<p class="publication-translation" lang="en"><span class="translation-label">English translation:</span> {re.escape(translation)}</p>'
+    expected = f'<h3 lang="zh-Hans">{original}</h3>\\s*<p class="publication-translation" lang="en">{re.escape(translation)} <span class="translation-label">\\(translation\\)</span></p>'
     assert re.search(expected, text), original
 assert text.count('class="publication-translation"') == 4
 publication_links = [a['href'] for a in research.attrs('a') if a.get('class') == 'publication-link']
@@ -134,3 +134,11 @@ for phrase in ['This message has already been submitted. / 这条留言已经提
 assert '/assets/guestbook.css?v=2-bilingual' in home
 assert '/assets/guestbook.js?v=2-bilingual' in home
 print('PASS bilingual guestbook labels, privacy disclosures, errors, and refresh feedback')
+
+# Translation labels should be unobtrusive and follow each English title.
+assert 'English translation:' not in text
+assert text.count('(translation)') == 4
+assert 'provided for reference' not in text
+for file in ['research/index.html', 'projects/index.html', 'interests/index.html']:
+    assert 'class="eyebrow"' not in (ROOT/file).read_text(), file
+print('PASS concise translation suffixes and page headings')
