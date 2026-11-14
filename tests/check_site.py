@@ -90,7 +90,7 @@ translations = {
     "出口经验与企业对外直接投资": "Export Experience and Firms’ Outward Foreign Direct Investment"
 }
 for original, translation in translations.items():
-    expected = f'<h3 lang="zh-Hans">{original}</h3>\\s*<p class="publication-translation" lang="en">{re.escape(translation)} <span class="translation-label">\\(translation\\)</span></p>'
+    expected = f'<h3 lang="zh-Hans">{original}</h3>\\s*<p class="publication-translation" lang="en">{re.escape(translation)}&nbsp;<span class="translation-label">\\(translation\\)</span></p>'
     assert re.search(expected, text), original
 assert text.count('class="publication-translation"') == 4
 publication_links = [a['href'] for a in research.attrs('a') if a.get('class') == 'publication-link']
