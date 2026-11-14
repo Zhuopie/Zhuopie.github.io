@@ -135,3 +135,13 @@ h2 { font: 400 26px/1.3 var(--serif); letter-spacing: -.015em; }
   a { color: black; }
   .site-footer { font-size: 9pt; }
 }
+
+/* Conference entries prioritize venue and date, with bilingual titles below. */
+.conference-group { margin-top: 32px; }
+.conference-group-title { font: 500 20px/1.4 var(--serif); }
+.conference-location { font-size: 15px; line-height: 1.65; color: var(--ink); }
+.conference-location strong { font-weight: 600; }
+.conference-date { margin-top: 4px; font-size: 14px; color: var(--muted); }
+.conference-name { margin-top: 13px; font: 400 20px/1.45 var(--serif); letter-spacing: -.01em; }
+.conference-original { margin-top: 5px; font-size: 14px; line-height: 1.7; color: var(--muted); }
+.conference-award { margin-top: 8px; font-size: 14px; font-weight: 600; color: var(--ink); }
