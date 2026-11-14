@@ -58,7 +58,7 @@ assert 'Case study, 2023.' in text
 projects=(ROOT/'projects/index.html').read_text()
 assert projects.count('<dd>Research participant</dd>')==2
 assert '<dt>Subproject PI</dt><dd><a ' in projects
-assert '2022.01–2026.12' in projects
+assert 'Jan 2022–Dec 2026' in projects
 for term in ['数字经济反垄断科学监管创新研究','市场监管服务和融入全国统一大市场建设的政策研究','博士生国家奖学金','上海市优秀博士毕业生']:
     assert term in projects,term
 print('PASS note removal, static deployment, sitemap, robots, six publications, separate case study, advisors, project roles, and honors')
@@ -68,7 +68,7 @@ assert home.count('Assistant Professor') == 4  # description, OG description, JS
 assert 'profile-details' not in home and 'class="position"' not in home
 assert 'class="eyebrow"' not in home
 assert 'Outstanding Paper Award, 2026' in projects
-assert '中国数字经济与管理学术会议暨中国信息学会第38届年会（2026）会议优秀论文' in projects
+assert '中国数字经济与管理学术会议暨中国信息经济学会第38届年会（2026）会议优秀论文' in projects
 interests=(ROOT/'interests/index.html').read_text()
 assert 'I enjoy playing badminton.' in interests and 'More to come.' not in interests
 assert 'Traffic Supply' not in projects  # Do not infer or add a paper title.
@@ -90,15 +90,15 @@ translations = {
     "出口经验与企业对外直接投资": "Export Experience and Firms’ Outward Foreign Direct Investment"
 }
 for original, translation in translations.items():
-    expected = f'<h3 lang="zh-Hans">{original}</h3>\\s*<p class="publication-translation" lang="en">{re.escape(translation)}&nbsp;<span class="translation-label">\\(translation\\)</span></p>'
+    expected = rf'<h3 lang="en">{re.escape(translation)}&nbsp;<span class="translation-label">\(translation\)</span></h3>\s*<p class="publication-original" lang="zh-Hans">{original}</p>'
     assert re.search(expected, text), original
-assert text.count('class="publication-translation"') == 4
+assert text.count('class="publication-original"') == 5
 publication_links = [a['href'] for a in research.attrs('a') if a.get('class') == 'publication-link']
 assert publication_links == [
-    'https://jmsc.tju.edu.cn/jmsc/article/issue/2026_5',
-    'https://jrpl.ajcass.com/Magazine/GetIssueContentList?issue=4&year=2026',
     'https://doi.org/10.1080/00036846.2026.2665336',
     'https://doi.org/10.1080/13504851.2024.2449541',
+    'https://jmsc.tju.edu.cn/jmsc/article/issue/2026_5',
+    'https://jrpl.ajcass.com/Magazine/GetIssueContentList?issue=4&year=2026',
 ]
 assert 'University record' not in text
 assert 'The linked records provide publication details.' not in text
@@ -137,8 +137,31 @@ print('PASS bilingual guestbook labels, privacy disclosures, errors, and refresh
 
 # Translation labels should be unobtrusive and follow each English title.
 assert 'English translation:' not in text
-assert text.count('(translation)') == 4
+assert text.count('(translation)') == 5
 assert 'provided for reference' not in text
 for file in ['research/index.html', 'projects/index.html', 'interests/index.html']:
     assert 'class="eyebrow"' not in (ROOT/file).read_text(), file
 print('PASS concise translation suffixes and page headings')
+
+# Group publications by the language of publication, not by the translated title.
+english_publications = text.split('<section class="publications" aria-labelledby="publications">', 1)[1].split('</section>', 1)[0]
+chinese_publications = text.split('<section class="publications" aria-labelledby="chinese-publications">', 1)[1].split('</section>', 1)[0]
+assert 'English-language Publications' in english_publications
+assert 'Chinese-language Publications' in chinese_publications
+assert english_publications.count('<article>') == 2
+assert chinese_publications.count('<article>') == 4
+assert '<cite>Applied Economics</cite>' in english_publications
+assert '<cite>Applied Economics Letters</cite>' in english_publications
+assert '(translation)' not in english_publications
+assert chinese_publications.count('(translation)') == 4
+print('PASS two English-language and four Chinese-language publications')
+
+# English-first content preserves the Chinese originals and accurate roles.
+assert '<h3 lang="en">IT-Enabled Management Change at Xinbang' in text
+assert '信邦：信息化引导的管理变革' in text
+assert '邵翔，李玲芳，<strong>李卓派</strong>，张洁友' in text
+assert 'Innovations in Antitrust Regulation for the Digital Economy' in projects
+assert 'Market Regulation and the Development of a Unified National Market in China' in projects
+assert 'China Information Economics Society' in projects
+assert '羽毛球' in interests
+print('PASS English-first titles and preserved Chinese details')
