@@ -45,7 +45,7 @@ for path in ['_pages','_posts','gitbook','search.html','search_plus_index.json',
 assert (ROOT/'.nojekyll').is_file()
 sitemap=ET.parse(ROOT/'sitemap.xml')
 urls={x.text for x in sitemap.findall('.//{http://www.sitemaps.org/schemas/sitemap/0.9}loc')}
-assert urls=={'https://zhuopie.github.io/','https://zhuopie.github.io/research/','https://zhuopie.github.io/projects/','https://zhuopie.github.io/interests/'}
+assert urls=={'https://zhuopie.github.io/','https://zhuopie.github.io/research/','https://zhuopie.github.io/projects/','https://zhuopie.github.io/interests/','https://zhuopie.github.io/photos/'}
 assert 'Sitemap: https://zhuopie.github.io/sitemap.xml' in (ROOT/'robots.txt').read_text()
 research=Document((ROOT/'research/index.html').read_text()); assert len(research.attrs('article'))==7
 home=(ROOT/'index.html').read_text()
@@ -165,3 +165,29 @@ assert 'Market Regulation and the Development of a Unified National Market in Ch
 assert 'China Information Economics Society' in projects
 assert '羽毛球' in interests
 print('PASS English-first titles and preserved Chinese details')
+
+# The owner's standalone photo gallery must not add a visible title to the photo.
+gallery_path = ROOT/'photos/index.html'
+gallery_text = gallery_path.read_text()
+gallery = Document(gallery_text)
+assert any(a.get('href') == '/photos/' for a in Document(home).attrs('a'))
+assert len(gallery.attrs('h1')) == 1 and 'Photo Gallery' in ''.join(gallery.data) and '照片集' in gallery.data
+assert any(a.get('rel') == 'canonical' and a.get('href') == 'https://zhuopie.github.io/photos/' for a in gallery.attrs('link'))
+assert not gallery.attrs('figcaption')
+assert len(gallery.attrs('img')) == 1 and len(gallery.attrs('figure')) == 1
+photo = gallery.attrs('img')[0]
+assert photo.get('alt') and photo.get('width') and photo.get('height')
+assert not photo.get('title') and not photo.get('aria-label')
+assert photo.get('sizes') and len(photo['srcset'].split(',')) == 2
+for path in [photo['src'], *(x.split()[0] for x in photo['srcset'].split(','))]:
+    assert path.startswith('/photos/')
+    image = (ROOT/path.lstrip('/')).read_bytes()
+    assert image[:4] == b'RIFF' and image[8:12] == b'WEBP', path
+    # WebP container chunks: permit pixels but not camera/profile/author metadata.
+    offset = 12
+    while offset < len(image):
+        assert image[offset:offset + 4] not in (b'EXIF', b'XMP ', b'ICCP'), path
+        length = int.from_bytes(image[offset + 4:offset + 8], 'little')
+        offset += 8 + length + length % 2
+    assert offset == len(image), path
+print('PASS bilingual photo gallery, quiet homepage link, untitled responsive photo, and no image metadata')
